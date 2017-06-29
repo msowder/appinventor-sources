@@ -29,6 +29,7 @@ import com.google.appinventor.client.boxes.ViewerBox;
 import com.google.appinventor.client.editor.EditorManager;
 import com.google.appinventor.client.editor.FileEditor;
 import com.google.appinventor.client.editor.youngandroid.BlocklyPanel;
+import com.google.appinventor.client.editor.youngandroid.TutorialPanel;
 import com.google.appinventor.client.explorer.commands.ChainableCommand;
 import com.google.appinventor.client.explorer.commands.CommandRegistry;
 import com.google.appinventor.client.explorer.commands.SaveAllEditorsCommand;
@@ -923,7 +924,7 @@ public class Ode implements EntryPoint {
     mainPanel.add(topPanel, DockPanel.NORTH);
 
     // Create the Tutorial Panel
-    tutorialPanel = new Frame("");
+    tutorialPanel = new TutorialPanel();
     tutorialPanel.setWidth("100%");
     tutorialPanel.setHeight("100%");
     // Initially we do not display it. If the project we load has
@@ -1608,65 +1609,6 @@ public class Ode implements EntryPoint {
     dialogBox.setWidget(DialogBoxContents);
     dialogBox.show();
   }
-
-  /**
-   * Creates video on page!
-   */
-  public void createVideoDialog(String tutorialId) {
-    // Create the UI elements of the DialogBox
-    final DialogBox dialogBox = new DialogBox(true, true); // DialogBox(autohide, modal)
-    dialogBox.setStylePrimaryName("ode-DialogBox");
-    dialogBox.setText("Tutorial Video");
-    dialogBox.setGlassEnabled(true);
-    dialogBox.setAnimationEnabled(true);
-    VerticalPanel DialogBoxContents = new VerticalPanel();
-    // Adds Youtube Video
-    HTML message = new HTML("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + tutorialId + "\" frameborder=\"0\" allowfullscreen></iframe>");
-    message.setStyleName("DialogBox-message");
-    FlowPanel holder = new FlowPanel();
-    Button ok = new Button("Close");
-    ok.addClickListener(new ClickListener() {
-        public void onClick(Widget sender) {
-          dialogBox.hide();
-        }
-      });
-    ok.setStyleName("DialogBox-button");
-    holder.add(ok);
-    DialogBoxContents.add(message);
-    DialogBoxContents.add(holder);
-    dialogBox.setWidget(DialogBoxContents);
-    dialogBox.center();
-    dialogBox.show(); 
-    }
-
-  /*
-  * Enlarges image on page
-  */
-  public void createImageDialog(String img) {
-    // Create the UI elements of the DialogBox
-    final DialogBox dialogBox = new DialogBox(true, true); // DialogBox(autohide, modal)
-    dialogBox.setStylePrimaryName("ode-DialogBox");
-    dialogBox.setGlassEnabled(true);
-    dialogBox.setAnimationEnabled(true);
-    VerticalPanel DialogBoxContents = new VerticalPanel();
-    FlowPanel holder = new FlowPanel();
-    Button ok = new Button("Close");
-    ok.addClickListener(new ClickListener() {
-        public void onClick(Widget sender) {
-          dialogBox.hide();
-        }
-      });
-    ok.setStyleName("DialogBox-button");
-    // Adds Image
-    Image image = new Image(img);
-    image.setStyleName("DialogBox-image");
-    holder.add(ok);
-    DialogBoxContents.add(image);
-    DialogBoxContents.add(holder);
-    dialogBox.setWidget(DialogBoxContents);
-    dialogBox.center();
-    dialogBox.show();
-    }
 
   /**
    * Check the number of projects for the user and show the "no projects" dialog if no projects
