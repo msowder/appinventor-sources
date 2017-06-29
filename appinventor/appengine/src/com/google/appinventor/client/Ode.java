@@ -1610,6 +1610,65 @@ public class Ode implements EntryPoint {
   }
 
   /**
+   * Creates video on page!
+   */
+  public void createVideoDialog(String tutorialId) {
+    // Create the UI elements of the DialogBox
+    final DialogBox dialogBox = new DialogBox(true, true); // DialogBox(autohide, modal)
+    dialogBox.setStylePrimaryName("ode-DialogBox");
+    dialogBox.setText("Tutorial Video");
+    dialogBox.setGlassEnabled(true);
+    dialogBox.setAnimationEnabled(true);
+    VerticalPanel DialogBoxContents = new VerticalPanel();
+    // Adds Youtube Video
+    HTML message = new HTML("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + tutorialId + "\" frameborder=\"0\" allowfullscreen></iframe>");
+    message.setStyleName("DialogBox-message");
+    FlowPanel holder = new FlowPanel();
+    Button ok = new Button("Close");
+    ok.addClickListener(new ClickListener() {
+        public void onClick(Widget sender) {
+          dialogBox.hide();
+        }
+      });
+    ok.setStyleName("DialogBox-button");
+    holder.add(ok);
+    DialogBoxContents.add(message);
+    DialogBoxContents.add(holder);
+    dialogBox.setWidget(DialogBoxContents);
+    dialogBox.center();
+    dialogBox.show(); 
+    }
+
+  /*
+  * Enlarges image on page
+  */
+  public void createImageDialog(String img) {
+    // Create the UI elements of the DialogBox
+    final DialogBox dialogBox = new DialogBox(true, true); // DialogBox(autohide, modal)
+    dialogBox.setStylePrimaryName("ode-DialogBox");
+    dialogBox.setGlassEnabled(true);
+    dialogBox.setAnimationEnabled(true);
+    VerticalPanel DialogBoxContents = new VerticalPanel();
+    FlowPanel holder = new FlowPanel();
+    Button ok = new Button("Close");
+    ok.addClickListener(new ClickListener() {
+        public void onClick(Widget sender) {
+          dialogBox.hide();
+        }
+      });
+    ok.setStyleName("DialogBox-button");
+    // Adds Image
+    Image image = new Image(img);
+    image.setStyleName("DialogBox-image");
+    holder.add(ok);
+    DialogBoxContents.add(image);
+    DialogBoxContents.add(holder);
+    dialogBox.setWidget(DialogBoxContents);
+    dialogBox.center();
+    dialogBox.show();
+    }
+
+  /**
    * Check the number of projects for the user and show the "no projects" dialog if no projects
    * are present.
    */

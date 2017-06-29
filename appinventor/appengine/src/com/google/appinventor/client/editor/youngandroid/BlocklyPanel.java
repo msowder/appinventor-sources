@@ -403,6 +403,14 @@ public class BlocklyPanel extends HTMLPanel {
     return YaBlocksEditor.getComponentsJSONString(Long.parseLong(projectId));
   }
 
+  public static void getTutorialDialog(String tutorialId) {
+    Ode.getInstance().createVideoDialog(tutorialId); 
+  }
+
+  public static void getImageDialog(String img) {
+    Ode.getInstance().createImageDialog(img); 
+  }
+
   public static String getComponentInstanceTypeName(String formName, String instanceName) {
     return YaBlocksEditor.getComponentInstanceTypeName(formName, instanceName);
   }
@@ -540,6 +548,10 @@ public class BlocklyPanel extends HTMLPanel {
         $entry(@com.google.appinventor.client.editor.youngandroid.BlocklyPanel::getComponentInfo(Ljava/lang/String;));
     $wnd.BlocklyPanel_getComponentsJSONString =
         $entry(@com.google.appinventor.client.editor.youngandroid.BlocklyPanel::getComponentsJSONString(Ljava/lang/String;));
+    $wnd.BlocklyPanel_createTutorialDialog =
+        $entry(@com.google.appinventor.client.editor.youngandroid.BlocklyPanel::getTutorialDialog(Ljava/lang/String;));
+    $wnd.BlocklyPanel_createImageDialog =
+        $entry(@com.google.appinventor.client.editor.youngandroid.BlocklyPanel::getImageDialog(Ljava/lang/String;));
     $wnd.BlocklyPanel_storeBackpack =
       $entry(@com.google.appinventor.client.editor.youngandroid.BlocklyPanel::storeBackpack(Ljava/lang/String;));
     $wnd.BlocklyPanel_getOdeMessage =
@@ -554,6 +566,16 @@ public class BlocklyPanel extends HTMLPanel {
       $entry(@com.google.appinventor.client.editor.youngandroid.BlocklyPanel::getSnapEnabled());
     $wnd.BlocklyPanel_saveUserSettings =
       $entry(@com.google.appinventor.client.editor.youngandroid.BlocklyPanel::saveUserSettings());
+    $wnd.recieveMessage=function(event){
+      if (event.data.type == "video") {
+        $wnd.BlocklyPanel_createTutorialDialog(event.data.youtubeId);
+      }};
+    $wnd.addEventListener("message", $wnd.recieveMessage, false);
+    $wnd.recieveMessage=function(event){
+      if (event.data.type == "img") {
+        $wnd.BlocklyPanel_createImageDialog(event.data.imageId);
+      }};
+    $wnd.addEventListener("message", $wnd.recieveMessage, false);
   }-*/;
 
   private native void initWorkspace(String projectId, boolean readOnly, boolean rtl)/*-{
